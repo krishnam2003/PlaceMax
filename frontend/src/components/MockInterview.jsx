@@ -3,7 +3,6 @@
 // import {INTERVIEW_SYSTEM_PROMPT} from '../lib/geminiPrompt';
 
 
-// const API_KEY = "AIzaSyBSLWop1v5URVw68mjQn8FApXeU8W8Ojsc";
 // const genAI = new GoogleGenerativeAI(API_KEY);
 // const model = genAI.getGenerativeModel({
 //   model: "gemini-2.5-flash",          // or gemini-2.5-pro if available
