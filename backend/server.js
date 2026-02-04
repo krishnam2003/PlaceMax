@@ -38,6 +38,6 @@ app.use("/auth", adminRoutes);
 
 //app.use("/auth", UserRouter);
 mongoose.connect(process.env.MONGO_URI);
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, "0.0.0.0" , () => {
   console.log(`Server is running`);
 });
