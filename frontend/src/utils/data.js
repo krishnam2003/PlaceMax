@@ -1,3 +1,2 @@
-const api_endpoints = "https://placemax-48.onrender.com/auth";
-
+const api_endpoints = "http://localhost:3000/auth";
 export default api_endpoints;

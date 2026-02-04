@@ -201,6 +201,7 @@ function CompanyPage() {
       );
 
       console.log("Company API response:", res.data);
+      
 
       if (Array.isArray(res.data)) {
         setCompanies(res.data);
@@ -220,14 +221,14 @@ function CompanyPage() {
   /* ================= AUTH & USER ================= */
   useEffect(() => {
     axios
-      .get(`${api_endpoints}/auth/verify`, { withCredentials: true })
+      .get(`${api_endpoints}/verify`, { withCredentials: true })
       .then((res) => {
         if (!res.data.status) navigate("/login");
       })
       .catch(() => navigate("/login"));
 
     axios
-      .get(`${api_endpoints}/auth/currentUser`, {
+      .get(`${api_endpoints}/currentUser`, {
         withCredentials: true,
       })
       .then((res) => setCurrentUser(res.data.user))
