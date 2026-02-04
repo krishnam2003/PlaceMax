@@ -3,12 +3,21 @@ import jwt from "jsonwebtoken";
 export const verifyUser = (req, res, next) => {
   try {
     const token = req.cookies.token;
+
     if (!token) {
-      return res.json({ status: false, message: "No Token" });
+      return res.status(401).json({
+        status: false,
+        message: "No Token",
+      });
     }
-    jwt.verify(token, process.env.KEY);
+
+    const decoded = jwt.verify(token, process.env.KEY);
+    req.user = decoded; // ✅ attach user
     next();
   } catch (err) {
-    return res.json({ status: false, message: "Invalid Token" });
+    return res.status(401).json({
+      status: false,
+      message: "Invalid Token",
+    });
   }
 };

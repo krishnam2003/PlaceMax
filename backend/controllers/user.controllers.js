@@ -3,13 +3,21 @@ import { User } from "../models/user.js";
 import { Company } from "../models/Company.js";
 
 /* VERIFY USER */
-export const verifyAuth = async (req, res) => {
+export const verifyAuth = (req, res) => {
   try {
-    res.json({ status: true, message: "Authorized" });
+    return res.json({
+      status: true,
+      message: "Authorized",
+      user: req.user, // ✅ frontend can trust this
+    });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({
+      status: false,
+      message: "Internal Server Error",
+    });
   }
 };
+
 
 /* CURRENT USER */
 export const getCurrentUser = async (req, res) => {
