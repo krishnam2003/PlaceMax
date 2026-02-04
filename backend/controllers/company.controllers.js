@@ -32,7 +32,7 @@ export const addCompany = async (req, res) => {
     });
 
     await newCompany.save();
-    console.log(newCompany);
+    //console.log(newCompany);
     return res.json({ message: "Company Registered" });
   } catch (error) {
     console.error(error);

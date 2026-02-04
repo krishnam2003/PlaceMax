@@ -86,19 +86,19 @@ export const loginUser = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    console.log("Invalid User");
+    //console.log("Invalid User");
     return res.json("Invalid User");
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) {
-    console.log("Password Incorrect");
+    //console.log("Password Incorrect");
     return res.json("Password Incorrect");
   }
 
-  if (user.isAdmin === "1") {
-    console.log("User is admin");
-  }
+  // if (user.isAdmin === "1") {
+  //   console.log("User is admin");
+  // }
 
   const token = jwt.sign(
     { _id: user._id, username: user.username },
