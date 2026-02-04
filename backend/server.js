@@ -13,7 +13,7 @@ import adminRoutes from "./routes/admin.routes.js";
 const app = express();
 dotenv.config();
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  origin: ['https://place-max-z6dm.vercel.app/'],
   credentials: true
 
 }))
