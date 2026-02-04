@@ -81,92 +81,43 @@ export const registerUser = async (req, res) => {
 
 
 /* LOGIN */
-// export const loginUser = async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await User.findOne({ email });
-
-//   if (!user) {
-//     console.log("Invalid User");
-//     return res.json("Invalid User");
-//   }
-
-//   const validPassword = await bcrypt.compare(password, user.password);
-//   if (!validPassword) {
-//     console.log("Password Incorrect");
-//     return res.json("Password Incorrect");
-//   }
-
-//   if (user.isAdmin === "1") {
-//     console.log("User is admin");
-//   }
-
-//   const token = jwt.sign(
-//     { _id: user._id, username: user.username },
-//     process.env.KEY,
-//     { expiresIn: "1h" }
-//   );
-
-//   // res.cookie("token", token, { httpOnly: true, maxAge: 300000 });
-//   res.cookie("token", token, {
-//       httpOnly: false,
-//       sameSite: "lax",
-//       secure: false, // true in production (HTTPS)
-//       maxAge: 60 * 60 * 1000,
-//     });
-
-//   return res.json(user.isAdmin === "1" ? "Admin" : "Success");
-// };
-
 export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
 
-    // 1. Check user
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password",
-      });
-    }
+  if (!user) {
+    console.log("Invalid User");
+    return res.json("Invalid User");
+  }
 
-    // 2. Check password
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password",
-      });
-    }
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) {
+    console.log("Password Incorrect");
+    return res.json("Password Incorrect");
+  }
 
-    // 3. Generate token
-    const token = jwt.sign(
-      { id: user._id, role: user.isAdmin ? "admin" : "user" },
-      process.env.KEY,
-      { expiresIn: "1h" }
-    );
+  if (user.isAdmin === "1") {
+    console.log("User is admin");
+  }
 
-    // 4. Set cookie (IMPORTANT)
-    res.cookie("token", token, {
+  const token = jwt.sign(
+    { _id: user._id, username: user.username },
+    process.env.KEY,
+    { expiresIn: "1h" }
+  );
+
+  // res.cookie("token", token, { httpOnly: true, maxAge: 300000 });
+  res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: false, // true in production
+      secure: true, // true in production (HTTPS)
       maxAge: 60 * 60 * 1000,
     });
 
-    // 5. Send response
-    return res.status(200).json({
-      success: true,
-      role: user.isAdmin ? "admin" : "user",
-    });
-  } catch (error) {
-    console.error("Login error:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Server error",
-    });
-  }
+  return res.json(user.isAdmin === "1" ? "Admin" : "Success");
 };
+
+
 
 /* LOGOUT */
 export const logoutUser = (req, res) => {

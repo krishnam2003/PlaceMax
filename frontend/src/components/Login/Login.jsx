@@ -179,3 +179,115 @@ function Login() {
 export default Login;
 
 
+
+
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import Footer from "../Home/HomeComponents/Footer.jsx";
+// import api_endpoints from "../../utils/data.js";
+
+// function Login() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [errorMessage, setErrorMessage] = useState("");
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const navigate = useNavigate();
+
+//   axios.defaults.withCredentials = true;
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setErrorMessage("");
+
+//     if (!email.trim() || !password.trim()) {
+//       setErrorMessage("Email and password are required");
+//       return;
+//     }
+
+//     setIsLoading(true);
+
+//     try {
+//       const res = await axios.post(
+//         api_endpoints,
+//         { email, password },
+//         { withCredentials: true }
+//       );
+
+//       console.log("LOGIN RESPONSE:", res.data);
+
+//       if (res.data.success) {
+//         if (res.data.role === "admin") {
+//           navigate("/admin", { replace: true });
+//         } else {
+//           navigate("/home", { replace: true });
+//         }
+//       } else {
+//         setErrorMessage("Invalid email or password");
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       setErrorMessage("Something went wrong. Please try again.");
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex flex-col">
+//       <div className="flex-grow flex items-center justify-center px-4 py-12">
+//         <div className="w-full max-w-md">
+//           <div className="bg-white/80 dark:bg-zinc-900/70 backdrop-blur-md rounded-2xl border border-zinc-200/70 dark:border-zinc-700/60 shadow-xl overflow-hidden">
+//             <div className="p-8 lg:p-10">
+//               <div className="text-center mb-8">
+//                 <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-emerald-300 to-emerald-400 bg-clip-text text-transparent mb-2">
+//                   PlaceX
+//                 </h1>
+//                 <p className="text-lg text-zinc-600 dark:text-zinc-400">
+//                   Sign in to your account
+//                 </p>
+//               </div>
+
+//               {errorMessage && (
+//                 <div className="mb-6 p-4 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/50 rounded-xl text-rose-700 dark:text-rose-300 text-center text-sm font-medium">
+//                   {errorMessage}
+//                 </div>
+//               )}
+
+//               <form onSubmit={handleSubmit} className="space-y-5">
+//                 <input
+//                   type="email"
+//                   placeholder="you@example.com"
+//                   value={email}
+//                   onChange={(e) => setEmail(e.target.value)}
+//                   className="w-full px-4 py-3 rounded-xl border"
+//                 />
+
+//                 <input
+//                   type="password"
+//                   placeholder="••••••••"
+//                   value={password}
+//                   onChange={(e) => setPassword(e.target.value)}
+//                   className="w-full px-4 py-3 rounded-xl border"
+//                 />
+
+//                 <button
+//                   type="submit"
+//                   disabled={isLoading}
+//                   className="w-full py-3 rounded-xl bg-emerald-300 font-semibold"
+//                 >
+//                   {isLoading ? "Signing in..." : "Sign In"}
+//                 </button>
+//               </form>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// export default Login;
